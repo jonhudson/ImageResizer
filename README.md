@@ -2,6 +2,7 @@ ImageResizer
 =============
 
 A PHP class to resize images.
+Requires PHP GD library to be installed.
 
 Usage
 -----
