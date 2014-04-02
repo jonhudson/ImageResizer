@@ -1,5 +1,7 @@
 <?php
 
+namespace JonHudson\ImageResizer;
+
 /**
  * A class for resizing images.
  *
@@ -18,7 +20,13 @@ class ImageResizer
     private $image;
     private $details;
 
-
+       
+    /**
+     * 
+     * @param string $imageLocation path to image
+     * @throws Exception
+     * @return void
+     */
     public function prepare($imageLocation)
     {
         $this->origImageLocation = $imageLocation;
@@ -139,5 +147,59 @@ class ImageResizer
         }
 
         return $dimensions = array('requiredWidth' => $requiredWidth, 'requiredHeight' => $requiredHeight);
+    }
+    
+    /**
+     * 
+     * @return string 
+     */
+    public function getOrigImageLocation()
+    {
+        return $this->origImageLocation;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getImageFileName()
+    {
+        return $this->imageFileName;
+    }
+    
+    /**
+     * 
+     * @return int
+     */
+    public function getOrigImageHeight()
+    {
+        return $this->origImageHeight;
+    }
+    
+    /**
+     * 
+     * @return int
+     */
+    public function getOrigImageWidth()
+    {
+        return $this->origImageWidth;
+    }
+    
+    /**
+     * 
+     * @return resource
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 }

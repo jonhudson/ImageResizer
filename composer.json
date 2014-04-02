@@ -1,0 +1,22 @@
+{
+    "name": "jonhudson/imageresizer",
+    "description": "very lightweight package to easily resize images using gd library",
+    "authors" : [
+        {
+            "name": "Jon Hudson",
+            "email": "jonathanhudson82@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-gd": "*"
+    },    
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload":
+    {
+        "psr-4": {
+            "JonHudson\\ImageResizer\\": "src"
+        }
+    }
+}
