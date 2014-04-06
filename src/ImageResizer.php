@@ -32,7 +32,7 @@ class ImageResizer
         $this->details = getimagesize($this->origImageLocation);
 
         if ($this->details === false) {
-            throw new Exception('Not a valid image');
+            throw new \Exception('Not a valid image');
         }
 
         $this->setOrigImageHeight($this->details[1]);
@@ -61,7 +61,7 @@ class ImageResizer
                 $this->image = imagecreatefrompng($origImageLocation);
                 break;
             default:
-                throw new Exception('Image not a valid format');
+                throw new \Exception('Image not a valid format');
         }
     }
 
