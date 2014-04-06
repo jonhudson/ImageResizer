@@ -22,14 +22,6 @@ class ImageResizerTest extends \PHPUnit_Framework_TestCase
         return $method->invokeArgs($object, $parameters);
     }
     
-    public function testGetFilenameReturnsFilenameInCorrectFormat()
-    {
-        $imageLocation = 'path/to/image.jpg';        
-        $actual = $this->invokeMethod($this->imageResizer, 'getFileName', array($imageLocation));
-        
-        $this->assertEquals('image', $actual);
-    }
-    
     /**
      * @expectedException Exception
      */

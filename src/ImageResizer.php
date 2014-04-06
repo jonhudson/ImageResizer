@@ -14,7 +14,6 @@ class ImageResizer
 {
     
     private $origImageLocation;
-    private $imageFileName;
     private $origImageHeight;
     private $origImageWidth;
     private $image;
@@ -30,7 +29,6 @@ class ImageResizer
     public function prepare($imageLocation)
     {
         $this->origImageLocation = $imageLocation;
-        $this->imageFileName = $this->getFilename($imageLocation);
         $this->details = getimagesize($this->origImageLocation);
 
         if ($this->details === false) {
@@ -67,22 +65,7 @@ class ImageResizer
         }
     }
 
-    /**
-     * 
-     * @param string $imageLocation
-     * @return string $filename
-     */
-    private function getFilename($imageLocation)
-    {
-        $filename = basename($imageLocation);
-        if ($pos = strpos($filename, '.')) {
-            $filename = substr($filename, 0, $pos);
-        }
-
-        return $filename;
-    }
-    
-    
+       
     /**
      * 
      * @param int $width
@@ -99,13 +82,13 @@ class ImageResizer
 		
 		switch ($this->details[2]) {
             case 1:
-                imagegif($imageDestination, $destination . $this->imageFileName . '.gif');
+                imagegif($imageDestination, $destination);
                 break;
             case 2:
-                imagejpeg($imageDestination, $destination . $this->imageFileName . '.jpeg', $imageQuality);
+                imagejpeg($imageDestination, $destination, $imageQuality);
                 break;
             case 3:
-                imagepng($imageDestination, $destination . $this->imageFileName . '.png');
+                imagepng($imageDestination, $destination);
                 break;
         }
         
