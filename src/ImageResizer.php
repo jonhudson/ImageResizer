@@ -88,7 +88,7 @@ class ImageResizer
      * @param int $width
      * @param int $height
      * @param string $destination
-     * @param int $imageQuality     * 
+     * @param int $imageQuality   
      * @return void
      */
     public function resize($width, $height, $destination, $imageQuality = 100)
@@ -116,7 +116,7 @@ class ImageResizer
     /**
      * 
      * @param int $width
-     * @param int $height     * 
+     * @param int $height 
      * @return array the actual required width and height to be used
      */
     private function getRequiredDimensions($width, $height)
