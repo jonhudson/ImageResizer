@@ -3,7 +3,7 @@
 namespace JonHudson\ImageResizer;
 
 /**
- * A class for resizing images.
+ * Resize png, jpeg or gif files.
  *
  *
  * @author Jon Hudson <jonathanhudson82@gmail.com>
@@ -12,7 +12,7 @@ namespace JonHudson\ImageResizer;
 
 class ImageResizer
 {
-    // Original image details
+    
     private $origImageLocation;
     private $imageFileName;
     private $origImageHeight;
@@ -37,14 +37,22 @@ class ImageResizer
             throw new Exception('Not a valid image');
         }
 
-        $this->origImageHeight = $this->details[1];
-        $this->origImageWidth = $this->details[0];
-        $this->createImageFromSrc($this->origImageLocation);
+        $this->setOrigImageHeight($this->details[1]);
+        $this->setOrigImageWidth($this->details[0]);
+        $this->createImageFromSrc($this->origImageLocation, $this->details[2]);
     }
-
-    private function createImageFromSrc($origImageLocation)
+    
+    /**
+     * creates image from the source image
+     * 
+     * @param string $origImageLocation
+     * @param int $imageType
+     * @throws Exception if image not in valid format
+     * @return void 
+     */
+    private function createImageFromSrc($origImageLocation, $imageType)
     {
-        switch ($this->details[2]) {
+        switch ($imageType) {
             case 1:
                 $this->image = imagecreatefromgif($origImageLocation);
                 break;
@@ -59,6 +67,11 @@ class ImageResizer
         }
     }
 
+    /**
+     * 
+     * @param string $imageLocation
+     * @return string $filename
+     */
     private function getFilename($imageLocation)
     {
         $filename = basename($imageLocation);
@@ -69,6 +82,15 @@ class ImageResizer
         return $filename;
     }
     
+    
+    /**
+     * 
+     * @param int $width
+     * @param int $height
+     * @param string $destination
+     * @param int $imageQuality     * 
+     * @return void
+     */
     public function resize($width, $height, $destination, $imageQuality = 100)
     {
         $requiredDimensions = $this->getRequiredDimensions($width, $height);
@@ -91,6 +113,12 @@ class ImageResizer
     }
 
 
+    /**
+     * 
+     * @param int $width
+     * @param int $height     * 
+     * @return array the actual required width and height to be used
+     */
     private function getRequiredDimensions($width, $height)
     {
         // get width and height that final image needs to be
@@ -127,7 +155,7 @@ class ImageResizer
         }
         // if landscape, if width greater than required, keep using required width
         // and set required height according to ratio
-        if ($layout === 'landscape') {
+        else if ($layout === 'landscape') {
             if ($origWidth > $requiredWidth) {
                 $requiredHeight = $requiredWidth / $proportionRatio;
             } else {
@@ -137,7 +165,7 @@ class ImageResizer
             }
         }
         // finally, if portrait, follow same process swapping width and height.
-        if ($layout === 'portrait') {
+        else if ($layout === 'portrait') {
             if ($origHeight > $requiredHeight) {
                 $requiredWidth = $requiredHeight / $proportionRatio;
             } else {
@@ -149,57 +177,14 @@ class ImageResizer
         return $dimensions = array('requiredWidth' => $requiredWidth, 'requiredHeight' => $requiredHeight);
     }
     
-    /**
-     * 
-     * @return string 
-     */
-    public function getOrigImageLocation()
+      
+    public function setOrigImageWidth($width)
     {
-        return $this->origImageLocation;
+        return $this->origImageWidth = $width;
     }
     
-    /**
-     * 
-     * @return string
-     */
-    public function getImageFileName()
+    public function setOrigImageHeight($height)
     {
-        return $this->imageFileName;
-    }
-    
-    /**
-     * 
-     * @return int
-     */
-    public function getOrigImageHeight()
-    {
-        return $this->origImageHeight;
-    }
-    
-    /**
-     * 
-     * @return int
-     */
-    public function getOrigImageWidth()
-    {
-        return $this->origImageWidth;
-    }
-    
-    /**
-     * 
-     * @return resource
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-    
-    /**
-     * 
-     * @return array
-     */
-    public function getDetails()
-    {
-        return $this->details;
+        return $this->origImageHeight = $height;
     }
 }
