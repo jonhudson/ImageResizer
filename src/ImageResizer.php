@@ -102,7 +102,7 @@ class ImageResizer
                 imagegif($imageDestination, $destination . $this->imageFileName . '.gif');
                 break;
             case 2:
-                imagejpeg($imageDestination, $destination . $this->imageFileName . '.jpg', $imageQuality);
+                imagejpeg($imageDestination, $destination . $this->imageFileName . '.jpeg', $imageQuality);
                 break;
             case 3:
                 imagepng($imageDestination, $destination . $this->imageFileName . '.png');
